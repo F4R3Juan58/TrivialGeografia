@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrivialGeografia.MainPage"
+             xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
+             xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
+             xmlns:local="clr-namespace:TrivialGeografia.ViewModel"
+             BackgroundColor="#252525">
+
+    <VerticalStackLayout HorizontalOptions="Fill">
+        <StackLayout>
+            <progressBar:SfCircularProgressBar x:Name="Progreso" WidthRequest="100"  Maximum="60" SegmentCount="6" Progress="0" BackgroundColor="Transparent" HorizontalOptions="Start" Margin="50,50,0,-100"/>
+        </StackLayout>
+
+        <map:SfMaps HeightRequest="600" VerticalOptions="Fill">
+            <map:SfMaps.Layer>
+                <map:MapShapeLayer ShapesSource="https://cdn.syncfusion.com/maps/map-data/world-map.json"
+                           x:Name="Map"
+                           DataSource="{Binding DataWorld}" 
+                           PrimaryValuePath="Name"
+                           ShapeDataField="name"
+                           ShowDataLabels="True"
+                           ShapeColorValuePath="Continent"
+                           ShapeStroke="#252525"
+                           ShapeHoverStroke="#252525"
+                           ShapeStrokeThickness="2"
+                           EnableSelection="True"
+                           EnableZoomingAnimation="True"
+                           ShapeSelected="OnShapeSelected">
+                    <map:MapShapeLayer.ColorMappings>
+                        <map:EqualColorMapping Value="Africa" Color="Green" />
+                        <map:EqualColorMapping Value="Asia" Color="Yellow" />
+                        <map:EqualColorMapping Value="Europe" Color="Blue" />
+                        <map:EqualColorMapping Value="North America" Color="Red" />
+                        <map:EqualColorMapping Value="South America" Color="Orange" />
+                        <map:EqualColorMapping Value="Australia" Color="Purple" />
+                    </map:MapShapeLayer.ColorMappings>
+                </map:MapShapeLayer>
+            </map:SfMaps.Layer>
+        </map:SfMaps>
+
+        <Button
+            Margin="20"
+            Text="Reiniciar"
+            Clicked="onReiniciar"/>
+    </VerticalStackLayout>
+
+    <ContentPage.BindingContext>
+        <local:ViewModelWorld>
+            
+        </local:ViewModelWorld>
+    </ContentPage.BindingContext>
+    
+
+
+</ContentPage>

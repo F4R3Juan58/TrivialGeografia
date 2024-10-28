@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrivialGeografia.Asia"
+             Title="Asia"
+             xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:local="clr-namespace:TrivialGeografia.ViewModel">
+
+    <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Center">
+        <map:SfMaps HeightRequest="600"
+            VerticalOptions="Fill">
+
+            <map:SfMaps.Layer>
+
+                <map:MapShapeLayer 
+                            ShapesSource="asia.json"
+                            x:Name="MapAsia"
+                            DataSource="{Binding DataAsia}" 
+                              PrimaryValuePath="Name"
+                                ShapeDataField="name"
+                                ShowDataLabels="True"
+                                ShapeColorValuePath="Name"
+                                ShapeStroke="Black"
+                                ShapeHoverStroke="#252525"
+                                ShapeStrokeThickness="1"
+                                EnableSelection="True"
+                                ShapeSelected="MostrarPais"
+                                EnableZoomingAnimation="True">
+                    <map:MapShapeLayer.ColorMappings>
+                    </map:MapShapeLayer.ColorMappings>
+                </map:MapShapeLayer>
+            </map:SfMaps.Layer>
+        </map:SfMaps>
+        <ContentPage.BindingContext>
+            <local:ViewModelAsia/>
+        </ContentPage.BindingContext>
+
+        <syncfusion:SfPopup x:Name="popup" WidthRequest="300" HeightRequest="400">
+            <syncfusion:SfPopup.HeaderTemplate>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding LabelString}" 
+                        TextColor="Black"
+                        FontSize="Large"
+                        HeightRequest="50"
+                        WidthRequest="200"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        VerticalOptions="CenterAndExpand" />
+                </DataTemplate>
+            </syncfusion:SfPopup.HeaderTemplate>
+            <syncfusion:SfPopup.ContentTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <Button
+                            Text="{Binding Ciudad1}"
+                            BackgroundColor="Black"
+                            FontAttributes="Bold"
+                            HeightRequest="50"
+                            WidthRequest="300"
+                            Margin="10"
+                            Clicked="OnCiudadClicked" />
+
+                        <Button
+                            Text="{Binding Ciudad2}" 
+                                BackgroundColor="Black"
+                            HeightRequest="50"
+                            WidthRequest="300"
+                            Margin="10"
+                            Clicked="OnCiudadClicked" />
+
+                        <Button
+                            Text="{Binding Ciudad3}"
+                                    BackgroundColor="Black"
+                            HeightRequest="50"
+                            WidthRequest="300"
+                            Margin="10"
+                            Clicked="OnCiudadClicked" />
+
+                        <Button
+                            Text="{Binding Ciudad4}" 
+                                        BackgroundColor="Black"
+                            HeightRequest="50"
+                            WidthRequest="300"
+                            Margin="10"
+                            Clicked="OnCiudadClicked" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </syncfusion:SfPopup.ContentTemplate>
+        </syncfusion:SfPopup>
+    </VerticalStackLayout>
+
+</ContentPage>
